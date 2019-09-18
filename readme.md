@@ -1,8 +1,8 @@
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
-[![Build Status](https://travis-ci.org/ianmustafa/laravel-tdd.svg?branch=master)](https://travis-ci.org/ianmustafa/laravel-tdd)
-[![Code Style Status](https://github.styleci.io/repos/209108733/shield)](https://github.styleci.io/repos/209108733)
+<a href="https://travis-ci.org/ianmustafa/laravel-tdd"><img src="https://travis-ci.org/ianmustafa/laravel-tdd.svg?branch=master" alt="Build Status"></a>
+<a href="https://github.styleci.io/repos/209108733"><img src="https://github.styleci.io/repos/209108733/shield" alt="Codw Style Status"></a>
 </p>
 
 ## About Laravel TDD
