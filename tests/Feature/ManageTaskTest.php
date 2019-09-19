@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class ManageTaskTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function test_user_can_create_a_task()
     {
