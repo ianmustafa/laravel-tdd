@@ -11,7 +11,7 @@ class ManageTaskTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function test_user_can_create_a_task()
+    public function test_users_can_create_a_task()
     {
         $this->visit('/tasks');
 
@@ -33,7 +33,7 @@ class ManageTaskTest extends TestCase
     }
 
     /** @test */
-    public function test_new_task_entry_must_not_be_empty()
+    public function test_users_cannot_create_an_empty_task()
     {
         $this->visit('/tasks');
 
@@ -49,7 +49,7 @@ class ManageTaskTest extends TestCase
     }
 
     /** @test */
-    public function test_new_task_entry_must_not_be_too_short()
+    public function test_users_cannot_create_a_short_task()
     {
         $this->visit('/tasks');
 
@@ -74,7 +74,7 @@ class ManageTaskTest extends TestCase
     }
 
     /** @test */
-    public function test_new_task_entry_must_not_be_too_long()
+    public function test_users_cannot_create_a_long_task()
     {
         $this->visit('/tasks');
 
@@ -99,19 +99,19 @@ class ManageTaskTest extends TestCase
     }
 
     /** @test */
-    public function test_user_can_read_all_tasks()
+    public function test_users_can_read_all_tasks()
     {
         $this->assertTrue(true);
     }
 
     /** @test */
-    public function test_user_can_edit_an_existing_task()
+    public function test_users_can_edit_an_existing_task()
     {
         $this->assertTrue(true);
     }
 
     /** @test */
-    public function test_user_can_delete_an_existing_task()
+    public function test_users_can_delete_an_existing_task()
     {
         $this->assertTrue(true);
     }
