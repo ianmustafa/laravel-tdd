@@ -1,4 +1,4 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+<p align="center"><img src="https://rawcdn.githack.com/ianmustafa/laravel-tdd/master/cover.png" width="480"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/ianmustafa/laravel-tdd"><img src="https://travis-ci.org/ianmustafa/laravel-tdd.svg?branch=master" alt="Build Status"></a>
