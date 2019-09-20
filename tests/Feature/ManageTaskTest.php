@@ -48,7 +48,6 @@ class ManageTaskTest extends TestCase
         $this->see(__('validation.required', ['attribute' => 'description']));
     }
 
-
     /** @test */
     public function test_new_task_entry_must_not_be_too_short()
     {
