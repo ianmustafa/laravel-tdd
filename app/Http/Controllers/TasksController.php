@@ -16,7 +16,14 @@ class TasksController extends Controller
 
     public function store(Request $request)
     {
-        Task::create($request->only('name', 'description'));
+        // Task::create($request->only('name', 'description'));
+
+        $payload = $request->validate([
+            'name' => 'required|min:6|max:255',
+            'description' => 'required|min:12|max:255',
+        ]);
+
+        Task::create($payload);
 
         return back();
     }
