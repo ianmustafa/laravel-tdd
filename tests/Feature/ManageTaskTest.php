@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Task;
+use Faker\Generator as Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -13,34 +15,29 @@ class ManageTaskTest extends TestCase
     /** @test */
     public function test_users_can_create_a_task()
     {
+        $task = factory(Task::class)->make();
+
         $this->visit('/tasks');
 
-        $this->submitForm('Create Task', [
-            'name' => 'My First Task',
-            'description' => 'This is my first task in my new job.',
-        ]);
+        $this->submitForm('Create Task', $task->toArray());
 
-        $this->seeInDatabase('tasks', [
-            'name' => 'My First Task',
-            'description' => 'This is my first task in my new job.',
-            'is_done' => 0,
-        ]);
+        $task->setAttribute('is_done', false);
+        $this->seeInDatabase('tasks', $task->toArray());
 
         $this->seePageIs('/tasks');
 
-        $this->see('My First Task');
-        $this->see('This is my first task in my new job.');
+        $this->see($task->name);
+        $this->see($task->description);
     }
 
     /** @test */
     public function test_users_cannot_create_an_empty_task()
     {
+        $task = factory(Task::class)->state('empty')->make();
+
         $this->visit('/tasks');
 
-        $this->submitForm('Create Task', [
-            'name' => '',
-            'description' => '',
-        ]);
+        $this->submitForm('Create Task', $task->toArray());
 
         $this->seePageIs('/tasks');
 
@@ -51,12 +48,11 @@ class ManageTaskTest extends TestCase
     /** @test */
     public function test_users_cannot_create_a_short_task()
     {
+        $task = factory(Task::class)->state('short')->make();
+
         $this->visit('/tasks');
 
-        $this->submitForm('Create Task', [
-            'name' => 'Task',
-            'description' => 'Desc',
-        ]);
+        $this->submitForm('Create Task', $task->toArray());
 
         $this->seePageIs('/tasks');
 
@@ -69,19 +65,18 @@ class ManageTaskTest extends TestCase
             'min' => 12,
         ]));
 
-        $this->seeInField('name', 'Task');
-        $this->seeInField('description', 'Desc');
+        $this->seeInField('name', $task->name);
+        $this->seeInField('description', $task->description);
     }
 
     /** @test */
     public function test_users_cannot_create_a_long_task()
     {
+        $task = factory(Task::class)->state('long')->make();
+
         $this->visit('/tasks');
 
-        $this->submitForm('Create Task', [
-            'name' => str_repeat('Task', 75),
-            'description' => str_repeat('Desc', 75),
-        ]);
+        $this->submitForm('Create Task', $task->toArray());
 
         $this->seePageIs('/tasks');
 
@@ -94,14 +89,36 @@ class ManageTaskTest extends TestCase
             'max' => 255,
         ]));
 
-        $this->seeInField('name', str_repeat('Task', 75));
-        $this->seeInField('description', str_repeat('Desc', 75));
+        $this->seeInField('name', $task->name);
+        $this->seeInField('description', $task->description);
     }
 
     /** @test */
     public function test_users_can_read_all_tasks()
     {
-        $this->assertTrue(true);
+        $tasks = factory(Task::class, 3)->create();
+
+        $this->visit('/tasks');
+
+        $this->see($tasks[0]->name);
+        $this->see($tasks[0]->description);
+        $this->see($tasks[1]->name);
+        $this->see($tasks[1]->description);
+        $this->see($tasks[2]->name);
+        $this->see($tasks[2]->description);
+
+        $this->seeElement('a', [
+            'id'   => "edit-task-{$tasks[0]->id}",
+            'href' => url("tasks?action=edit&id={$tasks[0]->id}"),
+        ]);
+        $this->seeElement('a', [
+            'id'   => "edit-task-{$tasks[1]->id}",
+            'href' => url("tasks?action=edit&id={$tasks[1]->id}"),
+        ]);
+        $this->seeElement('a', [
+            'id'   => "edit-task-{$tasks[2]->id}",
+            'href' => url("tasks?action=edit&id={$tasks[2]->id}"),
+        ]);
     }
 
     /** @test */

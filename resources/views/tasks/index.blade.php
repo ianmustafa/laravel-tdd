@@ -8,6 +8,7 @@
         <ul class="list-group">
             @forelse ($tasks as $task)
             <li class="list-group-item">
+                <a href="{{ url('tasks?action=edit&id=' . $task->id) }}" id="edit-task-{{ $task->id }}" class="float-right">Edit</a>
                 <h5 class="mb-1">{{ $task->name }}</h5>
                 <p class="mb-0">{{ $task->description }}</p>
             </li>
